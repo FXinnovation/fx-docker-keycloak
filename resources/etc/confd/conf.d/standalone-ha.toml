@@ -1,0 +1,4 @@
+[template]
+src  = "standalone-ha.xml.tmpl"
+dest = "/opt/keycloak/standalone/configuration/standalone-ha.xml"
+keys = []

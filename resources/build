@@ -1,0 +1,53 @@
+#!/bin/sh
+set -e -x
+
+# Installing curl
+apk add --no-cache curl
+
+# Downloading artifact
+curl -L -o /resources/keycloak.tar.gz https://downloads.jboss.org/keycloak/${KEYCLOAK_VERSION}/keycloak-${KEYCLOAK_VERSION}.tar.gz
+
+# Inflating artifact
+tar -xzf /resources/keycloak.tar.gz -C /tmp
+
+# Creating install dir
+mkdir -p /opt/keycloak
+
+# Copying folder to destination
+cp -r /tmp/keycloak-${KEYCLOAK_VERSION}/* /opt/keycloak
+
+# Creating folder structure for postgres
+mkdir -p /opt/keycloak/modules/system/layers/keycloak/org/postgresql/main
+mkdir -p /opt/keycloak/modules/system/layers/base/org/postgresql/main
+
+# Downloading postgresql jdbc Driver
+curl -L -o /opt/keycloak/modules/system/layers/keycloak/org/postgresql/main/postgresql-${POSTGRESQLJDBCDRIVER_VERSION}.jar \
+  https://jdbc.postgresql.org/download/postgresql-${POSTGRESQLJDBCDRIVER_VERSION}.jar
+
+cp /opt/keycloak/modules/system/layers/keycloak/org/postgresql/main/postgresql-${POSTGRESQLJDBCDRIVER_VERSION}.jar \
+   /opt/keycloak/modules/system/layers/base/org/postgresql/main/postgresql-${POSTGRESQLJDBCDRIVER_VERSION}.jar
+
+# Adding new module for jgroups
+mv /resources/opt/keycloak/modules/system/layers/base/org/jgroups/main/module.xml \
+   /opt/keycloak/modules/system/layers/base/org/jgroups/main/module.xml
+
+# Installing confd
+# Adding confd for template generating
+curl -L --retry 5 -o /usr/local/bin/confd \
+   https://github.com/kelseyhightower/confd/releases/download/v${CONFD_VERSION}/confd-${CONFD_VERSION}-linux-amd64
+chmod +x /usr/local/bin/confd
+
+# Creating confd config directory
+mkdir -p /etc/confd/conf.d
+mkdir -p /etc/confd/templates
+
+# Moving templates in place
+cp /resources/etc/confd/templates/* /etc/confd/templates/
+# Moving config in place
+cp /resources/etc/confd/conf.d/* /etc/confd/conf.d/
+
+# creating keycloak user and group
+
+
+# Adding entrypoint
+mv /resources/entrypoint.sh /entrypoint.sh

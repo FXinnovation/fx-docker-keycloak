@@ -1,0 +1,3 @@
+[template]
+src  = "module.xml.tmpl"
+dest = "/opt/keycloak/modules/system/layers/keycloak/org/postgresql/main/module.xml"
