@@ -2,6 +2,7 @@ FROM openjdk:8u131-jdk-alpine
 
 ENV KEYCLOAK_VERSION=3.1.0.Final \
     POSTGRESQLJDBCDRIVER_VERSION=42.1.1 \
+    POSTGRES_DATABASE=keycloak \
     CONFD_VERSION=0.11.0 \
     POSTGRES_HOST=keycloak-pgsql \
     POSTGRES_USER=postgres \

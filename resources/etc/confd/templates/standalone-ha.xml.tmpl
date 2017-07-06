@@ -127,7 +127,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://{{getenv "POSTGRES_HOST"}}:{{getenv "POSTGRES_PORT"}}/keycloak</connection-url>
+                    <connection-url>jdbc:postgresql://{{getenv "POSTGRES_HOST"}}:{{getenv "POSTGRES_PORT"}}/{{getenv "POSTGRES_DATABASE"}}</connection-url>
                     <driver>postgresql</driver>
                     <security>
                         <user-name>{{getenv "POSTGRES_USER"}}</user-name>
@@ -312,7 +312,7 @@
                     <property
                     name="connection_driver">org.postgresql.Driver</property>
                     <property
-                    name="connection_url">jdbc:postgresql://{{getenv "POSTGRES_HOST"}}:{{getenv "POSTGRES_PORT"}}/keycloak</property>
+                    name="connection_url">jdbc:postgresql://{{getenv "POSTGRES_HOST"}}:{{getenv "POSTGRES_PORT"}}/{{getenv "POSTGRES_DATABASE"}}</property>
                     <property
                     name="connection_username">{{getenv "POSTGRES_USER"}}</property>
                     <property
@@ -515,7 +515,7 @@
             <inet-address value="${jboss.bind.address:0.0.0.0}"/>
         </interface>
         <interface name="private">
-            <inet-address value="${jboss.bind.address.private:0.0.0.0}"/>
+            <inet-address value="${jboss.bind.address.private:127.0.0.1}"/>
         </interface>
     </interfaces>
     <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
