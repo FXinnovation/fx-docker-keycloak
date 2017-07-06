@@ -6,7 +6,11 @@ ENV KEYCLOAK_VERSION=3.1.0.Final \
     POSTGRES_HOST=keycloak-pgsql \
     POSTGRES_USER=postgres \
     POSTGRES_PASSWORD=postgres \
-    POSTGRES_PORT=5432
+    POSTGRES_PORT=5432 \
+    KEYCLOAK_USERNAME=admin \
+    KEYCLOAK_PASSWORD="" \
+    JBOSS_USERNAME=admin \
+    JBOSS_PASSWORD=pleasechangemeorelse
 
 ARG BUILD_DATE
 ARG VCS_REF
