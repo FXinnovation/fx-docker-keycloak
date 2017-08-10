@@ -217,10 +217,10 @@
                 <local-cache name="users">
                     <eviction max-entries="10000" strategy="LRU"/>
                 </local-cache>
-                <replicated-cache name="sessions" mode="SYNC" batching="true"/>
-                <replicated-cache name="offlineSessions" mode="SYNC" batching="true"/>
-                <replicated-cache name="loginFailures" mode="SYNC" batching="true"/>
-                <replicated-cache name="authorization" mode="SYNC" batching="true"/>
+                <replicated-cache name="sessions" mode="SYNC"/>
+                <replicated-cache name="offlineSessions" mode="SYNC"/>
+                <replicated-cache name="loginFailures" mode="SYNC"/>
+                <replicated-cache name="authorization" mode="SYNC"/>
                 <replicated-cache name="work" mode="SYNC"/>
                 <local-cache name="keys">
                     <eviction max-entries="1000" strategy="LRU"/>
